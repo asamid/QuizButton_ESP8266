@@ -29,6 +29,11 @@ void setup() {
   esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
   esp_now_register_recv_cb(onReceive);
 
+　//MACアドレス確認
+　uint8_t mac0[6];
+　WiFi.macAddress(mac0);
+　Serial.printf("WiFi StationAP Mac Address = %02X:%02X:%02X:%02X:%02X:%02X\r\n", mac0[0], mac0[1], mac0[2], mac0[3], mac0[4], mac0[5]);
+  
   // 子機をすべて登録
   for (auto &mac : macs) {
     esp_now_add_peer(mac, ESP_NOW_ROLE_SLAVE, 1, NULL, 0);
